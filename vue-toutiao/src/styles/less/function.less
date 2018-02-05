@@ -1,0 +1,49 @@
+.border(@dir:true, @color: #ddd, @width: 1px) {
+    position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        transform-origin: 0 0;    //设置元素的基点为0 0
+        transform: scale(0.5); 
+    }
+}
+.border(@dir:true, @color: #ddd, @width: 1px) when (@dir = true) {
+    &:before{
+        width: 200%;
+        height: 200%;
+        top:0;left:0;
+        border: @width solid @color;
+    } 
+}
+.border(@dir, @color: #ddd, @width: 1px) when (@dir = 'left') {
+    &:before{
+        width: @width*2;
+        height: 200%;
+        top:0;left:0;
+        border-left: @width solid @color;
+    } 
+}
+.border(@dir, @color: #ddd, @width: 1px) when (@dir = 'bottom') {
+    &:before{
+        width: 200%;
+        height: @width*2;
+        bottom:0;left:0;
+        border-bottom: @width solid @color;
+    } 
+}
+.border(@dir, @color: #ddd, @width: 1px) when (@dir = 'top') {
+    &:before{
+        width: 200%;
+        height: @width*2;
+        top:0;left:0;
+        border-top: @width solid @color;
+    } 
+}
+.border(@dir, @color: #ddd, @width: 1px) when (@dir = 'right') {
+    &:before{
+        width: @width*2;
+        height: 200%;
+        top:0;right:0;
+        border-right: @width solid @color;
+    } 
+}

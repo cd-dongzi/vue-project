@@ -1,0 +1,15 @@
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    /* 通过设置 color 来改变 SVG 的颜色/fill */
+    fill: currentColor;
+    overflow: hidden;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+}
+* {
+    box-sizing: border-box;
+}
