@@ -39,9 +39,11 @@ function checkCode(res) {
     return res
 }
 
-const baseURL = 'https://easy-mock.com/mock/5a77d46f4eea0d7bf5c6cb68/apis/'
+const baseURL = 'https://easy-mock.com/mock/5a83160c948cfd365a524088/apis/'
 
-// 备用路径  https://easy-mock.com/mock/5a6fe597a52f145df7e8a38a/apis/
+// 备用路径  
+// const baseURL = 'https://easy-mock.com/mock/5a83160c948cfd365a524088/apis/'
+// const baseURL = 'https://easy-mock.com/mock/5a6fe597a52f145df7e8a38a/apis/'
 export default {
     get(url, params) {
         if (!url) return
