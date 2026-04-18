@@ -40,6 +40,15 @@ export const constantRouterMap = [
         ]
     },
     { 
+        path: '/hotnews',  
+        meta: { page: true},
+        component: _import_('Layout/index'),
+        redirect: '/',
+        children: [
+            { path: '/', component: _import_('HotNews/index'), name: '热点新闻' }
+        ]
+    },
+    { 
         path: '/account', 
         meta: { page: true}, 
         component: _import_('Account/index'),

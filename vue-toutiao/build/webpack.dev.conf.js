@@ -52,7 +52,7 @@ const dev = merge(baseConf, {
             errors: true,
             warnings: false
         },
-        quiet: true // 终端输出的只有初始启动信息。 webpack 的警告和错误是不输出到终端的
+        quiet: false // 终端输出 webpack 的警告和错误
     },
     plugins: [
         //开启HMR(热替换功能,替换更新部分,不重载页面！)

@@ -11,6 +11,7 @@ const user = {
             {title: '首页', icon: 'home', path: '/home'},
             {title: '西瓜视频', icon: 'video', path: '/video'},
             {title: '微头条', icon: 'comment', path: '/headline'},
+            {title: '热点新闻', icon: 'comment', path: '/hotnews'},
             {title: `${Cookie.get('username')?'我的':'未登录'}`, icon: `${Cookie.get('username')?'account':'account1'}`, path: '/account'}
         ]
     },

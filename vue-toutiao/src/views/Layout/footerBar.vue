@@ -34,7 +34,7 @@
             width: 100%;
         }
         li {
-            width: 25%;
+            width: 20%;
             float: left;
             text-align: center;
             color: @theme-black;
