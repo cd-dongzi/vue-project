@@ -7,6 +7,7 @@ import home from './modules/home'
 import headline from './modules/headline'
 import video from './modules/video'
 import record from './modules/record'
+import hotnews from './modules/hotnews'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
         home,
         video,
         headline,
-        record
+        record,
+        hotnews
     },
     getters
 })

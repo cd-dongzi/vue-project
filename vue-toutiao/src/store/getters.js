@@ -38,6 +38,12 @@ const getters = {
     recordTypes: state => state.record.types,
     recordIndex: state => state.record.index,
     recordLoading: state => state.record.loading,
-    recordEnd: state => state.record.end
+    recordEnd: state => state.record.end,
+
+    /*hotnews*/
+    hotNewsList: state => state.hotnews.hotNewsList,
+    hotNewsIndex: state => state.hotnews.hotNewsIndex,
+    hotNewsLoading: state => state.hotnews.hotNewsLoading,
+    hotNewsEnd: state => state.hotnews.hotNewsEnd
 }
 export default getters
