@@ -8,7 +8,13 @@
 
 ## Reporting a vulnerability
 
-请不要为未公开漏洞创建公开 Issue。请使用 GitHub 的 **Security → Report a vulnerability** 私下提交报告：
+请不要为未公开漏洞创建公开 Issue，也不要在公开 Pull Request 或讨论区披露以下内容：
+
+- 可复现的攻击步骤、利用代码或攻击载荷；
+- 真实账号、Cookie、访问令牌、密码或个人数据；
+- 未公开的第三方漏洞详情。
+
+请使用 GitHub 的 **Security → Report a vulnerability** 私下提交报告：
 
 https://github.com/cd-dongzi/vue-project/security/advisories/new
 
