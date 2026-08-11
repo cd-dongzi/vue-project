@@ -4,7 +4,7 @@
 
 ## 环境要求
 
-- Node.js 6 或更高版本
+- Node.js 8.10 或更高版本
 - npm
 
 ## 安装与开发
@@ -44,7 +44,7 @@ npm run dll
 
 ## 相关链接
 
-**[在线预览地址（也可通过 Chrome 控制台手机模式观看）](http://dzblog.cn/cases/vue-toutiao/index.html)**
+**[在线预览地址（也可通过 Chrome 开发者工具的设备模式观看）](http://dzblog.cn/cases/vue-toutiao/index.html)**
 
 > [SegmentFault](https://segmentfault.com/a/1190000013153782?utm_source=index-newest)
 
