@@ -10,7 +10,7 @@
     "prebuild": "node build/ensure-dll.js",
     "build": "node build/build.js",
     "dll": "webpack -p --progress --config build/webpack.dll.conf.js",
-    "test:ensure-dll": "node build/ensure-dll.test.js",
+    "test:ensure-dll": "node build/ensure-dll.test.js && node build/dll-command.test.js",
     "analyz": "cross-env analyz_npm_config_report=true npm run build"
   },
   "author": "",
