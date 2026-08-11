@@ -1,0 +1,51 @@
+name: Bug report
+description: 报告可以复现的功能或构建问题
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。安全漏洞请不要填写此表单，请使用仓库的私有漏洞报告入口。
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 说明实际行为和预期行为。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 提供最小、完整、可重复的步骤。
+      placeholder: |
+        1. 运行命令……
+        2. 打开页面……
+        3. 执行操作……
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      description: Node.js、npm、浏览器和操作系统版本。
+      placeholder: Node.js 16, npm 8, Chrome, macOS
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志或截图
+      description: 请先删除 Token、Cookie、用户名等敏感信息。
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已搜索现有 Issue，确认没有相同报告。
+          required: true
+        - label: 此报告不包含未公开的安全漏洞或敏感信息。
+          required: true
