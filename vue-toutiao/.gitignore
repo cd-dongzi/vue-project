@@ -2,6 +2,7 @@
 node_modules/
 dist/
 manifest.json
+static/js/dll/
 # Editor directories and files
 .idea
 .vscode

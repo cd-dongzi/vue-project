@@ -1,17 +1,34 @@
 {
   "name": "toutiao",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "Educational Vue 2 mobile news application",
   "main": "index.js",
   "scripts": {
+    "predev": "npm run dll",
     "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
-    "start": "cnpm run dev",
+    "start": "npm run dev",
+    "prebuild": "npm run dll",
     "build": "node build/build.js",
-    "dll": "webpack -p --progress --config build/webpack.dll.conf.js",
-    "analyz": "cross-env analyz_npm_config_report=true npm run build"
+    "dll": "node node_modules/webpack/bin/webpack.js -p --progress --config build/webpack.dll.conf.js",
+    "analyze": "cross-env analyz_npm_config_report=true npm run build",
+    "analyz": "npm run analyze"
   },
-  "author": "",
+  "author": "cd-dongzi",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cd-dongzi/vue-project.git",
+    "directory": "vue-toutiao"
+  },
+  "bugs": {
+    "url": "https://github.com/cd-dongzi/vue-project/issues"
+  },
+  "homepage": "https://github.com/cd-dongzi/vue-project#readme",
+  "engines": {
+    "node": ">=14 <17",
+    "npm": ">=6"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
