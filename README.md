@@ -2,7 +2,7 @@
 
 这个仓库用于整理 Vue 实战项目，目前包含仿今日头条 App：
 
-- [`vue-toutiao`](./vue-toutiao/)：基于 Vue 2 的移动端单页应用
+- [`vue-toutiao`](./vue-toutiao/)：基于 Vue 2 和 Webpack 3 的移动端单页应用
 
 ## 快速开始
 
