@@ -2,7 +2,8 @@
 
 const fs = require('fs')
 const path = require('path')
-const { spawnSync } = require('child_process')
+const spawnSync = require('child_process').spawnSync
+const getDllCommand = require('./dll-command')
 
 const projectRoot = path.resolve(__dirname, '..')
 const artifacts = [
@@ -15,10 +16,14 @@ const dependencies = [
 ]
 
 function needsDllBuild(artifactPaths, dependencyPaths) {
-  if (artifactPaths.some(file => !fs.existsSync(file))) return true
+  if (artifactPaths.some(function (file) { return !fs.existsSync(file) })) return true
 
-  const oldestArtifact = Math.min(...artifactPaths.map(file => fs.statSync(file).mtime.getTime()))
-  const newestDependency = Math.max(...dependencyPaths.map(file => fs.statSync(file).mtime.getTime()))
+  const oldestArtifact = Math.min.apply(null, artifactPaths.map(function (file) {
+    return fs.statSync(file).mtime.getTime()
+  }))
+  const newestDependency = Math.max.apply(null, dependencyPaths.map(function (file) {
+    return fs.statSync(file).mtime.getTime()
+  }))
 
   return newestDependency > oldestArtifact
 }
@@ -30,8 +35,8 @@ function ensureDll() {
   }
 
   console.log('DLL artifacts are missing or stale; running npm run dll...')
-  const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm'
-  const result = spawnSync(npmCommand, ['run', 'dll'], {
+  const dllCommand = getDllCommand(process.platform, process.env.ComSpec)
+  const result = spawnSync(dllCommand.command, dllCommand.args, {
     cwd: projectRoot,
     stdio: 'inherit'
   })
