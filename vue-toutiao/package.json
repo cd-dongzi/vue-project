@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predev": "node build/ensure-dll.js",
     "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
     "start": "cnpm run dev",
+    "prebuild": "node build/ensure-dll.js",
     "build": "node build/build.js",
     "dll": "webpack -p --progress --config build/webpack.dll.conf.js",
+    "test:ensure-dll": "node build/ensure-dll.test.js",
     "analyz": "cross-env analyz_npm_config_report=true npm run build"
   },
   "author": "",
