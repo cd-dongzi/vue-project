@@ -5,12 +5,13 @@
   "description": "Educational Vue 2 mobile news application",
   "main": "index.js",
   "scripts": {
-    "predev": "npm run dll",
+    "predev": "node build/ensure-dll.js",
     "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "prebuild": "npm run dll",
+    "prebuild": "node build/ensure-dll.js",
     "build": "node build/build.js",
     "dll": "node node_modules/webpack/bin/webpack.js -p --progress --config build/webpack.dll.conf.js",
+    "test:ensure-dll": "node build/ensure-dll.test.js && node build/dll-command.test.js",
     "analyze": "cross-env analyz_npm_config_report=true npm run build",
     "analyz": "npm run analyze"
   },

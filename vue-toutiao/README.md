@@ -13,13 +13,31 @@ npm run dev
 
 开发服务器默认运行在 `http://localhost:8080`。
 
+`npm run dev` 会先检查 `build/manifest.json` 和 `static/js/dll/vendor.dll.js`。产物缺失，或 `package.json`、`package-lock.json` 比现有产物更新时，会自动执行 `npm run dll`；产物有效时则跳过重复生成。
+
 ## 构建
 
 ```bash
 npm run build
 ```
 
-构建结果写入 `dist`。开发和生产构建会通过 npm 前置脚本自动运行 `npm run dll`，确保干净克隆后也能生成所需的 `manifest.json` 和 DLL 资源。
+`npm run build` 同样会在构建前检查 DLL，构建结果写入 `dist`。
+
+如需强制重新生成 DLL，可手动执行：
+
+```bash
+npm run dll
+```
+
+## 排障
+
+如果遇到 `Cannot find module './manifest.json'`，请先执行：
+
+```bash
+npm run dll
+```
+
+生成 `build/manifest.json` 和 `static/js/dll/vendor.dll.js` 后，再重新运行 `npm run dev` 或 `npm run build`。
 
 ## 注意事项
 

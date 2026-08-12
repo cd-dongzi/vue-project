@@ -48,13 +48,13 @@ npm run dev
 
 开发服务器默认运行在 `http://localhost:8080`。
 
-生产构建会先生成 Webpack DLL 清单，再编译应用：
+生产构建会先检查 Webpack DLL 清单，再编译应用：
 
 ```bash
 npm run build
 ```
 
-构建结果写入 `vue-toutiao/dist`。`npm run dev` 同样会在启动前生成 DLL 清单，因此干净克隆后无需手动创建 `manifest.json`。
+构建结果写入 `vue-toutiao/dist`。`npm run dev` 和 `npm run build` 都会在启动前检查 DLL 产物：缺失或过期时自动生成，有效时跳过重复生成，因此干净克隆后无需手动创建 `manifest.json`。手动恢复和排障步骤见 [`vue-toutiao/README.md`](vue-toutiao/README.md)。
 
 ## 目录结构
 
