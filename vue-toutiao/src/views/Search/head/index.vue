@@ -3,7 +3,7 @@
         <div class="search-title df-sb border-half-bottom">
             <div class="search">
                 <Icon name="2fangdajing" class="search-icon"></Icon>
-                <input type="text" placeholder="搜索些啥呢..." v-model="$store.state.search.keyword" @change="search">
+                <input type="text" placeholder="请输入搜索内容" v-model="$store.state.search.keyword" @change="search">
             </div>
             <div class="close" @click="back($router)">取消</div>
         </div>
@@ -13,13 +13,17 @@
     export default {
         methods: {
             search () {
-                if (!this.$store.state.search.keyword) {
+                const keyword = (this.$store.state.search.keyword || '').trim()
+                if (!keyword) {
                     this.$alert('搜索条件不能为空')
                     return
                 }
+                this.$store.state.search.keyword = keyword
                 this.$store.state.search.pageindex = 1
                 this.$store.state.search.loadingMore = false
-                this.$store.dispatch('getSearchList', { keyword: this.$store.state.search.keyword, pageindex: this.$store.state.search.pageindex})
+                this.$store.state.search.end = false
+                this.$store.dispatch('addSearchHistory', keyword)
+                this.$store.dispatch('getSearchList', { keyword, pageindex: this.$store.state.search.pageindex })
             }
         }
     }
@@ -35,7 +39,8 @@
             color: @font-gray;
             .search-icon {
                 position: absolute;
-                left: 0.06rem;top: 50%;
+                left: 0.06rem;
+                top: 50%;
                 transform: translateY(-50%);
             }
             input {
@@ -47,7 +52,7 @@
                 text-indent: 0.3rem;
                 border-radius: 0.04rem;
                 font-size: 0.12rem;
-                color: #ccc;
+                color: #666;
             }
         }
         .close {
@@ -55,5 +60,4 @@
             color: @theme-blue;
         }
     }
-    
 </style>

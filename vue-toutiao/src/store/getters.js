@@ -12,6 +12,7 @@ const getters = {
     keyword: state => state.search.keyword,
     searchPageindex: state => state.search.pageindex,
     searchList: state => state.search.list,
+    searchHistory: state => state.search.history,
     searchLoading: state => state.search.loading,
     searchEnd: state => state.search.end,
 
