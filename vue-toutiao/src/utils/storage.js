@@ -1,5 +1,6 @@
 const ls = window.localStorage;
 const ss = window.sessionStorage;
+const getStoredValue = require('./storage-value');
 
 export const Cookie = {
     get (key) {
@@ -42,8 +43,7 @@ export const Cookie = {
 
 export const Local = {
     get(key) {
-        if (key) return JSON.parse(ls.getItem(key))
-        return null
+        return getStoredValue(ls, key)
     },
     set(key, val) {
         const setting = arguments[0]
@@ -66,8 +66,7 @@ export const Local = {
 
 export const Session = {
     get(key) {
-        if (key) return JSON.parse(ss.getItem(key))
-        return null
+        return getStoredValue(ss, key)
     },
     set(key, val) {
         const setting = arguments[0]
