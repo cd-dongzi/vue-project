@@ -30,6 +30,8 @@
 </template>
 <script>
     import { mapGetters } from 'vuex'
+    const loadArticleWhenChanged = require('./load-article-when-changed')
+
     export default {
         async created () {
             this.$showLoading()
@@ -47,10 +49,14 @@
             ])
         },
         watch: {
-            async $route () {
-                this.$showLoading()
-                await this.$store.dispatch('getArticle', {id: this.$route.params.id})
-                this.$hideLoading()
+            async '$route.params.id' (nextId, previousId) {
+                await loadArticleWhenChanged(
+                    nextId,
+                    previousId,
+                    id => this.$store.dispatch('getArticle', {id}),
+                    this.$showLoading,
+                    this.$hideLoading
+                )
             }
         }
     }
