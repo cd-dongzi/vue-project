@@ -13,7 +13,8 @@
     "dll": "node node_modules/webpack/bin/webpack.js -p --progress --config build/webpack.dll.conf.js",
     "test:ensure-dll": "node build/ensure-dll.test.js && node build/dll-command.test.js",
     "test:storage": "node src/utils/storage-value.test.js",
-    "test": "npm run test:ensure-dll && npm run test:storage",
+    "test:article-route": "node src/views/Article/load-article-when-changed.test.js",
+    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:article-route",
     "analyze": "cross-env analyz_npm_config_report=true npm run build",
     "analyz": "npm run analyze"
   },
