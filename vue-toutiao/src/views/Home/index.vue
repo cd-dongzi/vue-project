@@ -68,6 +68,11 @@
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
     import { mapGetters } from 'vuex'
     import TopBar from './topbar/index.vue'
+    const {
+        captureScrollPositions,
+        restoreScrollPositions
+    } = require('./scroll-position')
+
     export default {
         components: {
             swiper, 
@@ -76,6 +81,29 @@
         },
         created () {
             this.$store.dispatch('getHomeList', this.newsList[this.homeNewsIndex])
+        },
+        beforeRouteEnter (to, from, next) {
+            next(vm => {
+                if (from.name !== '文章') {
+                    vm.$store.commit('SETHOMESCROLLPOSITIONS', [])
+                    return
+                }
+
+                vm.$nextTick(() => {
+                    restoreScrollPositions(
+                        vm.$el.querySelectorAll('.swiper-box'),
+                        vm.$store.state.home.scrollPositions
+                    )
+                    vm.$store.commit('SETHOMESCROLLPOSITIONS', [])
+                })
+            })
+        },
+        beforeRouteLeave (to, from, next) {
+            const positions = to.name === '文章'
+                ? captureScrollPositions(this.$el.querySelectorAll('.swiper-box'))
+                : []
+            this.$store.commit('SETHOMESCROLLPOSITIONS', positions)
+            next()
         },
         methods: {
             async end () {
