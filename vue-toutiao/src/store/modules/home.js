@@ -15,6 +15,7 @@ const home = {
         })(),
         newsIndex: 0,
         newsPrevIndex: 0,
+        scrollPositions: [],
         newsLoading: false,
         end: false
     },
@@ -46,6 +47,9 @@ const home = {
         }
     },
     mutations:{
+        SETHOMESCROLLPOSITIONS (state, positions) {
+            state.scrollPositions = positions
+        },
         ADDHOMETAG (state, news) {
             if (state.newsList.every( tag => tag.title !== news.title)) {
                 state.newsList.push(news)
