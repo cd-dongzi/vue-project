@@ -23,6 +23,7 @@ const video = {
                         commit('GETVIDEOLIST', res.data.list)
                         resolve(res.data.list)
                     }).catch( err => {
+                        state.loading = false
                         reject(err)
                     })
             })

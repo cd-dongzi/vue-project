@@ -41,6 +41,7 @@ const home = {
                         commit('GETHOMELIST', res.data.list)
                         resolve(res.data.list)
                     }).catch( err => {
+                        state.newsLoading = false
                         reject(err)
                     })
             })

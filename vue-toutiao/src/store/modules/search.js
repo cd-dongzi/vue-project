@@ -34,6 +34,7 @@ const common = {
                         
                         resolve(res.data.list)
                     }).catch( err => {
+                        state.loading = false
                         reject(err)
                     })
             })
