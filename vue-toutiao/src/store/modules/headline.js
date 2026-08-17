@@ -23,6 +23,7 @@ const headline = {
                         commit('GETHEADLINELIST', res.data.list)
                         resolve(res.data.list)
                     }).catch( err => {
+                        state.loading = false
                         reject(err)
                     })
             })
@@ -37,6 +38,7 @@ const headline = {
                         commit('ADDHEADLINE', res.data)
                         resolve(res.data)
                     }).catch( err => {
+                        state.loading = false
                         reject(err)
                     })
             })

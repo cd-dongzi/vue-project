@@ -31,6 +31,7 @@ const record = {
                         commit('GETRECORDLIST', res.data.list)
                         resolve(res.data.list)
                     }).catch( err => {
+                        state.loading = false
                         reject(err)
                     })
             })

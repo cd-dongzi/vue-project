@@ -15,7 +15,8 @@
     "test:storage": "node src/utils/storage-value.test.js",
     "test:article-route": "node src/views/Article/load-article-when-changed.test.js",
     "test:home-scroll": "node src/views/Home/scroll-position.test.js",
-    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:article-route && npm run test:home-scroll",
+    "test:loading-state": "node src/store/modules/loading-state.test.js",
+    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:article-route && npm run test:home-scroll && npm run test:loading-state",
     "analyze": "cross-env analyz_npm_config_report=true npm run build",
     "analyz": "npm run analyze"
   },
