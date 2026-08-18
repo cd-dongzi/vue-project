@@ -7,6 +7,7 @@ router.beforeEach((to, from, next) => {
         if (store.state.user.user.name) { // 是否已经登陆
             next()
         }else{
+            next(false)
             Vue.prototype.$alert('请先登录!')
                 .then( () => {
                     store.state.user.isLogin = true
