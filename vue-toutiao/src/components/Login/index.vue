@@ -48,9 +48,10 @@
                         password: this.password
                     })
                 }catch (e) {
-
+                    return
+                }finally {
+                    this.$hideLoading()
                 }
-                this.$hideLoading()
                 this.$set(this.$store.state.user.footerBarList, 3, {title: '我的', icon: 'account1', path: '/account'})
                 this.$emit('close')
                 // let avatar = require('assets/images/avatar.png')
