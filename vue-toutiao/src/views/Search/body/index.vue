@@ -97,12 +97,16 @@
             removeHistory (keyword) {
                 this.$store.dispatch('removeSearchHistory', keyword)
             },
-            loadingMore () {
-                return new Promise(async (resolve) => {
-                    this.$store.state.search.pageindex++
-                    await this.$store.dispatch('getSearchList', { keyword: this.keyword, pageindex: this.searchPageindex })
-                    resolve()
-                })
+            async loadingMore () {
+                const previousPage = this.$store.state.search.pageindex
+                const nextPage = previousPage + 1
+                this.$store.state.search.pageindex = nextPage
+                try {
+                    await this.$store.dispatch('getSearchList', { keyword: this.keyword, pageindex: nextPage })
+                }catch (error) {
+                    this.$store.state.search.pageindex = previousPage
+                    throw error
+                }
             }
         },
         computed: {

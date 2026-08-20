@@ -66,12 +66,10 @@
         },
         
         methods: {
-            loadingMore () {
-                return new Promise( async (resolve, reject) => {
-                    this.pageindex ++
-                    await this.$store.dispatch('getHeadlineList', { pageindex: this.pageindex })
-                    resolve()
-                })
+            async loadingMore () {
+                const nextPage = this.pageindex + 1
+                await this.$store.dispatch('getHeadlineList', { pageindex: nextPage })
+                this.pageindex = nextPage
             },
             // 点赞
             likeNum (item) {
