@@ -59,12 +59,10 @@
         },
         methods: {
             // 加载更多
-            loadingMore () {
-                return new Promise( async (resolve, reject) => {
-                    this.pageindex ++
-                    await this.$store.dispatch('getVideoList', { pageindex: this.pageindex })
-                    resolve()
-                })
+            async loadingMore () {
+                const nextPage = this.pageindex + 1
+                await this.$store.dispatch('getVideoList', { pageindex: nextPage })
+                this.pageindex = nextPage
             },
             // 播放
             play (index, item) {
