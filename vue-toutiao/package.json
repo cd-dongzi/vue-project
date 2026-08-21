@@ -19,7 +19,8 @@
     "test:router-permission": "node src/router/permission.test.js",
     "test:login": "node src/components/Login/login.test.js",
     "test:loading-more": "node src/views/loading-more-error.test.js",
-    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:article-route && npm run test:home-scroll && npm run test:loading-state && npm run test:router-permission && npm run test:login && npm run test:loading-more",
+    "test:scroll-directive": "node src/directive/scroll.test.js",
+    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:article-route && npm run test:home-scroll && npm run test:loading-state && npm run test:router-permission && npm run test:login && npm run test:loading-more && npm run test:scroll-directive",
     "analyze": "cross-env analyz_npm_config_report=true npm run build",
     "analyz": "npm run analyze"
   },
