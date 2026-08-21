@@ -1,5 +1,6 @@
 import Vue from 'vue'
 
+const scrollHandlers = new WeakMap()
 
 Vue.directive('scroll', {
     inserted: function (el, binding, vnode, oldVnode) {
@@ -7,7 +8,7 @@ Vue.directive('scroll', {
             isLoading = false,
             cb_name = binding.expression,
             cb = vnode.context[cb_name]
-        el.addEventListener('scroll', async () => {
+        const handler = async () => {
             if (w + el.scrollTop + 10 >= el.firstChild.clientHeight && !isLoading) {
                 isLoading = true
                 try {
@@ -17,6 +18,14 @@ Vue.directive('scroll', {
                 }
                 isLoading = false
             }
-        })
+        }
+        scrollHandlers.set(el, handler)
+        el.addEventListener('scroll', handler)
+    },
+    unbind: function (el) {
+        const handler = scrollHandlers.get(el)
+        if (!handler) return
+        el.removeEventListener('scroll', handler)
+        scrollHandlers.delete(el)
     }
 })
