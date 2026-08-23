@@ -27,12 +27,14 @@ try {
   Module._load = originalLoad
 }
 
-function run() {
+async function run() {
   const listeners = new Map()
+  let loadCount = 0
   const element = {
     offsetHeight: 100,
-    scrollTop: 0,
-    firstChild: { clientHeight: 500 },
+    scrollTop: 250,
+    scrollHeight: 500,
+    firstChild: { clientHeight: 300 },
     addEventListener(type, handler) {
       listeners.set(type, handler)
     },
@@ -42,6 +44,7 @@ function run() {
   }
   const context = {
     loadingMore() {
+      loadCount += 1
       return Promise.resolve()
     }
   }
@@ -56,6 +59,25 @@ function run() {
     true,
     'the directive must register its scroll listener when inserted'
   )
+
+  await listeners.get('scroll')()
+  assert.strictEqual(
+    loadCount,
+    0,
+    'the directive must use the container scroll height instead of its first child'
+  )
+
+  element.offsetHeight = 200
+  element.scrollTop = 290
+  element.firstChild.clientHeight = 500
+
+  await listeners.get('scroll')()
+  assert.strictEqual(
+    loadCount,
+    1,
+    'the directive must read the current container height after layout changes'
+  )
+
   if (typeof scrollDirective.unbind === 'function') {
     scrollDirective.unbind(element)
   }
@@ -69,9 +91,7 @@ function run() {
   console.log('scroll directive cleanup tests passed')
 }
 
-try {
-  run()
-} catch (error) {
+run().catch(error => {
   console.error(error)
   process.exitCode = 1
-}
+})
