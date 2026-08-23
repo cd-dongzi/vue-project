@@ -4,12 +4,11 @@ const scrollHandlers = new WeakMap()
 
 Vue.directive('scroll', {
     inserted: function (el, binding, vnode, oldVnode) {
-        let w = el.offsetHeight,
-            isLoading = false,
+        let isLoading = false,
             cb_name = binding.expression,
             cb = vnode.context[cb_name]
         const handler = async () => {
-            if (w + el.scrollTop + 10 >= el.firstChild.clientHeight && !isLoading) {
+            if (el.offsetHeight + el.scrollTop + 10 >= el.scrollHeight && !isLoading) {
                 isLoading = true
                 try {
                     cb && await cb()
