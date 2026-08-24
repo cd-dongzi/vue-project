@@ -60,6 +60,7 @@
         methods: {
             // 加载更多
             async loadingMore () {
+                if (this.videoEnd) return
                 const nextPage = this.pageindex + 1
                 await this.$store.dispatch('getVideoList', { pageindex: nextPage })
                 this.pageindex = nextPage
