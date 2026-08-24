@@ -98,6 +98,7 @@
                 this.$store.dispatch('removeSearchHistory', keyword)
             },
             async loadingMore () {
+                if (this.searchEnd) return
                 const previousPage = this.$store.state.search.pageindex
                 const nextPage = previousPage + 1
                 this.$store.state.search.pageindex = nextPage

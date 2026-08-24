@@ -67,6 +67,7 @@
         
         methods: {
             async loadingMore () {
+                if (this.headlineEnd) return
                 const nextPage = this.pageindex + 1
                 await this.$store.dispatch('getHeadlineList', { pageindex: nextPage })
                 this.pageindex = nextPage

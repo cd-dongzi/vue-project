@@ -126,6 +126,71 @@ async function run() {
     )
   }
 
+  const terminalCases = [
+    {
+      label: 'video',
+      method: video.methods.loadingMore,
+      createContext: dispatch => ({
+        pageindex: 3,
+        videoEnd: true,
+        $store: { dispatch }
+      }),
+      readPage: context => context.pageindex
+    },
+    {
+      label: 'headline',
+      method: headline.methods.loadingMore,
+      createContext: dispatch => ({
+        pageindex: 3,
+        headlineEnd: true,
+        $store: { dispatch }
+      }),
+      readPage: context => context.pageindex
+    },
+    {
+      label: 'search',
+      method: search.methods.loadingMore,
+      createContext: dispatch => ({
+        keyword: 'news',
+        searchEnd: true,
+        $store: {
+          state: {
+            search: {
+              keyword: 'news',
+              pageindex: 3,
+              loading: false,
+              loadingMore: true,
+              end: true
+            }
+          },
+          dispatch
+        }
+      }),
+      readPage: context => context.$store.state.search.pageindex
+    }
+  ]
+
+  for (const testCase of terminalCases) {
+    let dispatchCount = 0
+    const context = testCase.createContext(() => {
+      dispatchCount += 1
+      return Promise.resolve([])
+    })
+
+    await testCase.method.call(context)
+
+    assert.strictEqual(
+      dispatchCount,
+      0,
+      `${testCase.label} loading must not request another page after reaching the end`
+    )
+    assert.strictEqual(
+      testCase.readPage(context),
+      3,
+      `${testCase.label} loading must keep the terminal page number stable`
+    )
+  }
+
   console.log('loading more error tests passed')
 }
 
