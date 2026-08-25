@@ -51,11 +51,15 @@
     export default {
         data () {
             return {
-                pageindex: 1
+                pageindex: 1,
+                drawTimers: []
             }
         },
         created () {
             this.$store.dispatch('getVideoList', { pageindex: this.pageindex })
+        },
+        beforeDestroy () {
+            this.drawTimers.forEach((timer, index) => this.stopDrawing(index))
         },
         methods: {
             // 加载更多
@@ -74,23 +78,31 @@
             // 暂停
             pause (index, item) {
                 document.querySelectorAll('video')[index].pause()
+                this.stopDrawing(index)
                 item.playBol = false
                 this.$set(this.videoList, index, item)
+            },
+            stopDrawing (index) {
+                const timer = this.drawTimers[index]
+                if (timer === undefined || timer === null) return
+                clearInterval(timer)
+                this.drawTimers[index] = null
             },
             // canvas 绘制
             dragVideo (index) {
                 let video = document.querySelectorAll('video')[index],
                     ctx = document.querySelectorAll('canvas')[index].getContext('2d')
-                video.play()
-                let fps = 1000/30,
-                    w = document.querySelectorAll('.video')[index].clientWidth,
-                    h = document.querySelectorAll('.video')[index].clientHeight
+                let fps = 1000/30
 
-                video.addEventListener('play', () => {
-                    setInterval( () => {
-                        ctx.drawImage(video, 0, 0, 320, 176);
-                    }, fps)
-                })
+                this.stopDrawing(index)
+                video.play()
+                this.drawTimers[index] = setInterval( () => {
+                    if (video.ended) {
+                        this.stopDrawing(index)
+                        return
+                    }
+                    ctx.drawImage(video, 0, 0, 320, 176);
+                }, fps)
             }
         },
         computed: {
