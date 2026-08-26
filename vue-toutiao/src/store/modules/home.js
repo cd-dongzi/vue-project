@@ -59,6 +59,7 @@ const home = {
         },
         DELHOMETAG (state, news) {
             let index = state.newsList.findIndex( tag => tag.title === news.title)
+            if (index === -1) return
             state.newsList.splice(index, 1)
             Local.set('newList',  JSON.stringify(state.newsList))
         },
