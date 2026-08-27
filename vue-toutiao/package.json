@@ -12,7 +12,7 @@
     "build": "node build/build.js",
     "dll": "node node_modules/webpack/bin/webpack.js -p --progress --config build/webpack.dll.conf.js",
     "test:ensure-dll": "node build/ensure-dll.test.js && node build/dll-command.test.js",
-    "test:storage": "node src/utils/storage-value.test.js",
+    "test:storage": "node src/utils/storage-value.test.js && node src/utils/storage.test.js",
     "test:article-route": "node src/views/Article/load-article-when-changed.test.js",
     "test:home-scroll": "node src/views/Home/scroll-position.test.js",
     "test:home-tags": "node src/store/modules/home-tags.test.js",
