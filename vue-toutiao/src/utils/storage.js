@@ -15,16 +15,18 @@ export const Cookie = {
     },
     set (key, value, day) {
         let setting = arguments[0]
-        if (Object.prototype.toString.call(setting).slice(8, -1) === 'Object') {
-            for (let i in setting) {
-                let oDate = new Date()
-                oDate.setDate(oDate.getDate() + day)
-                document.cookie = i + '=' + setting[i] + ';expires=' + oDate
-            }
-        } else {
+        let expires = ''
+        if (typeof day === 'number') {
             let oDate = new Date()
             oDate.setDate(oDate.getDate() + day)
-            document.cookie = key + '=' + value + ';expires=' + oDate
+            expires = ';expires=' + oDate.toUTCString()
+        }
+        if (Object.prototype.toString.call(setting).slice(8, -1) === 'Object') {
+            for (let i in setting) {
+                document.cookie = i + '=' + setting[i] + expires
+            }
+        } else {
+            document.cookie = key + '=' + value + expires
         }
     },
     remove (key) {
