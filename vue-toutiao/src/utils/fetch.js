@@ -14,7 +14,7 @@ axios.interceptors.request.use(config => {
 })
 
 // 响应时
-axios.interceptors.response.use(response => response, err => Promise.resolve(err.response))
+axios.interceptors.response.use(response => response, err => err.response ? Promise.resolve(err.response) : Promise.reject(err))
 
 // 检查状态码
 function checkStatus(res) { 
