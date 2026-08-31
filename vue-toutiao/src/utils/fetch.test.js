@@ -10,11 +10,17 @@ const request = require('./fetch').default
 const originalAdapter = axios.defaults.adapter
 const offlineError = new Error('offline')
 const serverError = new Error('server failed')
+const emptyServerError = new Error('server failed without a response body')
 
 serverError.response = {
-  status: 500,
-  statusText: 'Service unavailable',
-  data: { msg: 'Service unavailable' }
+    status: 500,
+    statusText: 'Service unavailable',
+    data: { msg: 'Service unavailable' }
+}
+
+emptyServerError.response = {
+  status: 503,
+  statusText: 'Service unavailable'
 }
 
 axios.defaults.adapter = () => Promise.reject(offlineError)
@@ -31,6 +37,16 @@ request.get('/offline').then(
   return request.get('/server-error').then(
     () => {
       throw new Error('server errors should reject')
+    },
+    error => {
+      assert.strictEqual(error.message, 'Service unavailable')
+    }
+  )
+}).then(() => {
+  axios.defaults.adapter = () => Promise.reject(emptyServerError)
+  return request.get('/server-error-without-body').then(
+    () => {
+      throw new Error('server errors without a response body should reject')
     },
     error => {
       assert.strictEqual(error.message, 'Service unavailable')

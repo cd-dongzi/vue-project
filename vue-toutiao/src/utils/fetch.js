@@ -24,7 +24,7 @@ function checkStatus(res) {
     }
     return {
         code: 0,
-        msg: res.data.msg || res.statusText,
+        msg: (res.data && res.data.msg) || res.statusText,
         data: res.statusText
     }
     return res
