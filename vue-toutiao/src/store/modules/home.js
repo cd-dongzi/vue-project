@@ -3,14 +3,32 @@ import { Local } from 'utils/storage'
 import axios from 'src/utils/fetch'
 import Vue from 'vue'
 
+function isValidNewsList(newList) {
+    return Array.isArray(newList) && newList.length > 0 && newList.every(news => {
+        return news && typeof news === 'object' && news.id !== undefined && news.id !== null
+    })
+}
+
+function getInitialNewsList() {
+    let newList = Local.get('newList')
+    if (typeof newList === 'string') {
+        try {
+            newList = JSON.parse(newList)
+        } catch (error) {
+            newList = null
+        }
+    }
+    return isValidNewsList(newList) ? newList : newsList.slice(0, 12)
+}
+
 const home = {
     state: {
         newsList: (function(){
-            let newList = JSON.parse(Local.get('newList')) || newsList.slice(0, 12)
+            let newList = getInitialNewsList()
             newList.forEach( news => {
                 if (news.list) delete news.title
             })
-            Local.set('newList',  JSON.stringify(newList))
+            Local.set('newList', newList)
             return newList
         })(),
         newsIndex: 0,
@@ -54,14 +72,14 @@ const home = {
         ADDHOMETAG (state, news) {
             if (state.newsList.every( tag => tag.title !== news.title)) {
                 state.newsList.push(news)
-                Local.set('newList',  JSON.stringify(state.newsList))
+                Local.set('newList', state.newsList)
             }
         },
         DELHOMETAG (state, news) {
             let index = state.newsList.findIndex( tag => tag.title === news.title)
             if (index === -1) return
             state.newsList.splice(index, 1)
-            Local.set('newList',  JSON.stringify(state.newsList))
+            Local.set('newList', state.newsList)
         },
         GETHOMELIST (state, list) {
             state.newsList[state.newsIndex].list = list
