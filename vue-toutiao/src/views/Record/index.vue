@@ -61,7 +61,7 @@
                             </div>
                         </li>
                     </ul>
-                    <NoneData v-if="type.list.length > 0"></NoneData>
+                    <NoneData v-if="type.list.length === 0"></NoneData>
                 </section>
             </swiper-slide>
         </swiper>
