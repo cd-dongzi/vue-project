@@ -16,6 +16,7 @@
     "test:fetch": "node src/utils/fetch.test.js",
     "test:article-route": "node src/views/Article/load-article-when-changed.test.js",
     "test:home-scroll": "node src/views/Home/scroll-position.test.js",
+    "test:home-end-indicator": "node src/views/Home/end-indicator.test.js",
     "test:home-tags": "node src/store/modules/home-tags.test.js",
     "test:loading-state": "node src/store/modules/loading-state.test.js",
     "test:router-permission": "node src/router/permission.test.js",
@@ -24,7 +25,7 @@
     "test:record-empty-state": "node src/views/Record/empty-state.test.js",
     "test:video-playback": "node src/views/Video/playback.test.js",
     "test:scroll-directive": "node src/directive/scroll.test.js",
-    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:fetch && npm run test:article-route && npm run test:home-scroll && npm run test:home-tags && npm run test:loading-state && npm run test:router-permission && npm run test:login && npm run test:loading-more && npm run test:record-empty-state && npm run test:video-playback && npm run test:scroll-directive",
+    "test": "npm run test:ensure-dll && npm run test:storage && npm run test:fetch && npm run test:article-route && npm run test:home-scroll && npm run test:home-end-indicator && npm run test:home-tags && npm run test:loading-state && npm run test:router-permission && npm run test:login && npm run test:loading-more && npm run test:record-empty-state && npm run test:video-playback && npm run test:scroll-directive",
     "analyze": "cross-env analyz_npm_config_report=true npm run build",
     "analyz": "npm run analyze"
   },
