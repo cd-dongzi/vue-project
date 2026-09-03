@@ -57,7 +57,7 @@
                             </div>
                         </li>
                     </ul>
-                    <NoneData v-if="news.list&&news.list.length>0"></NoneData>
+                    <NoneData v-if="homeEnd"></NoneData>
                 </section>
             </swiper-slide>
         </swiper>
