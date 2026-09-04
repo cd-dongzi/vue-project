@@ -80,9 +80,13 @@
         },
         methods: {
             slidePage (index) {
-                this.$store.state.record.index = index || 0
+                const tabIndex = Number(index)
+                const recordIndex = Number.isInteger(tabIndex) && tabIndex >= 0 && tabIndex < this.recordTypes.length
+                    ? tabIndex
+                    : 0
+                this.$store.state.record.index = recordIndex
                 this.$store.dispatch('getRecordList', this.recordTypes[this.recordIndex])
-                this.swiper.slideTo(index)
+                this.swiper.slideTo(recordIndex)
             },
             activeTabs (index) {
                 this.slidePage(index)
