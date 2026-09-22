@@ -63,7 +63,7 @@
     "file-loader": "^1.1.6",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
-    "less": "^2.7.3",
+    "less": "^4.9.1",
     "less-loader": "^4.0.5",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -82,7 +82,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
-    "qs": "^6.5.1",
+    "qs": "^6.16.0",
     "vue": "^2.5.13",
     "vue-awesome-swiper": "^3.1.2",
     "vue-router": "^3.0.1",
